@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Должность</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Должность</h1>
+<form th:action="@{/post/{id}(id=${post.id})}" method="post">
+  <input type="text" name="name" placeholder="Название" th:value="${post.name}" required>
+  <input type="number" name="bet" placeholder="Ставка" th:value="${post.bet}" required>
+  <button type="submit">Редактировать</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Сотрудник</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<nav>
+  <ul>
+    <li><a th:href="@{/client}">Клиенты</a></li>
+    <li><a th:href="@{/commit}">Совершает</a></li>
+    <li><a th:href="@{/deal}">Сделка</a></li>
+    <li><a th:href="@{/employee}">Сотрудник</a></li>
+    <li><a th:href="@{/pays}">Платит</a></li>
+    <li><a th:href="@{/post}">Должность</a></li>
+    <li><a th:href="@{/tax}">Налог</a></li>
+  </ul>
+</nav>
+<h1>Сотрудник</h1>
+<form th:action="@{/employee/add}" method="post">
+  <input type="text" name="full_name" placeholder="ФИО" required>
+  <select name="post" required>
+    <option selected disabled>Выберите должность</option>
+    <option th:each="post : ${posts}" th:value="${post.id}" th:text="${post.name}"/>
+  </select>
+  <button type="submit">Добавить</button>
+</form>
+<table>
+  <thead>
+  <tr>
+    <th>ФИО</th>
+    <th>Должность</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="employee : ${employees}">
+    <td th:text="${employee.full_name}"></td>
+    <td th:text="${employee.post.name}"></td>
+    <td>
+      <form th:action="@{/employee/delete/{id}(id=${employee.id})}" method="post">
+        <button type="submit">Удалить</button>
+      </form>
+    </td>
+    <td>
+      <form th:action="@{'/employee/' + ${employee.id}}">
+        <button type="submit">Редактировать</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

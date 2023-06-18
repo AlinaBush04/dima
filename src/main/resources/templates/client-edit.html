@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Клиенты</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Клиенты</h1>
+<form th:action="@{/client/{id}(id=${client.id})}" method="post">
+  <input type="text" name="full_name" th:value="${client.full_name}" required>
+  <select name="employee" required>
+    <option selected disabled>Выберите импресарио</option>
+    <option th:each="employee : ${employees}" th:value="${employee.id}" th:text="${employee.full_name}" th:selected="${employee.id == client.employee.id}"/>
+  </select>
+  <button type="submit">Редактировать</button>
+</form>
+</body>
+</html>

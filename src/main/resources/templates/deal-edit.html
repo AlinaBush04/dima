@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Сделка</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Сделка</h1>
+<form th:action="@{/deal/{id}(id=${deal.id})}" method="post">
+    <input type="text" name="name" placeholder="Название" th:value="${deal.name}" required>
+    <input type="date" name="date" th:value="${deal.date}" required>
+    <input type="number" name="profit" placeholder="Выгода" th:value="${deal.profit}" required>
+    <button type="submit">Редактировать</button>
+</form>
+</body>
+</html>

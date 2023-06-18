@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Сделка</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a th:href="@{/client}">Клиенты</a></li>
+        <li><a th:href="@{/commit}">Совершает</a></li>
+        <li><a th:href="@{/deal}">Сделка</a></li>
+        <li><a th:href="@{/employee}">Сотрудник</a></li>
+        <li><a th:href="@{/pays}">Платит</a></li>
+        <li><a th:href="@{/post}">Должность</a></li>
+        <li><a th:href="@{/tax}">Налог</a></li>
+    </ul>
+</nav>
+<h1>Сделка</h1>
+<form th:action="@{/deal/add}" method="post">
+    <input type="text" name="name" placeholder="Название" required>
+    <input type="date" name="date" required>
+    <input type="number" name="profit" placeholder="Выгода" required>
+    <button type="submit">Добавить</button>
+</form>
+<form th:action="@{/deal/filter}">
+    <select name="employee" required>
+        <option selected disabled>Выберите сотрудника</option>
+        <option th:each="employee : ${employees}" th:value="${employee.id}" th:text="${employee.full_name}"/>
+    </select>
+    <select name="client" required>
+        <option selected disabled>Выберите клиента</option>
+        <option th:each="client : ${clients}" th:value="${client.id}" th:text="${client.full_name}"/>
+    </select>
+    <input type="date" name="minDate">
+    <input type="date" name="maxDate">
+    <button type="submit">Поиск</button>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>Название</th>
+        <th>Дата</th>
+        <th>Выгода</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="deal : ${deals}">
+        <td th:text="${deal.name}"></td>
+        <td th:text="${deal.date}"></td>
+        <td th:text="${deal.profit}"></td>
+        <td>
+            <form th:action="@{/deal/delete/{id}(id=${deal.id})}" method="post">
+                <button type="submit">Удалить</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{'/deal/' + ${deal.id}}">
+                <button type="submit">Редактировать</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

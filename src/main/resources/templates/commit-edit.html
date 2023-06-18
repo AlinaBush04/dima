@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Совершает</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Совершает</h1>
+<form th:action="@{/commit/{id}(id=${commit.id})}" method="post">
+  <input type="number" name="bonus" th:value="${commit.bonus}" required>
+  <select name="deal" required>
+    <option selected disabled>Выберите сделку</option>
+    <option th:each="deal : ${deals}" th:value="${deal.id}" th:text="${deal.name}" th:selected="${deal.id == commit.deal.id}"/>
+  </select>
+  <select name="employee" required>
+    <option selected disabled>Выберите сотрудника</option>
+    <option th:each="employee : ${employees}" th:value="${employee.id}" th:text="${employee.full_name}" th:selected="${employee.id == commit.employee.id}"/>
+  </select>
+  <select name="client" required>
+    <option selected disabled>Выберите клиента</option>
+    <option th:each="client : ${clients}" th:value="${client.id}" th:text="${client.full_name}" th:selected="${client.id == commit.client.id}"/>
+  </select>
+  <button type="submit">Редактировать</button>
+</form>
+</body>
+</html>

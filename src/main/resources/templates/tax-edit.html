@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Налог</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Налог</h1>
+<form th:action="@{/tax/{id}(id=${tax.id})}" method="post">
+  <input type="number" name="tax_deduction" th:value="${tax.tax_deduction}" required>
+  <button type="submit">Редактировать</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Платит</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Платит</h1>
+<form th:action="@{/pays/{id}(id=${pays.id})}" method="post">
+    <input type="date" name="date" th:value="${pays.date}" required>
+    <select name="tax" required>
+        <option selected disabled>Выберите налог</option>
+        <option th:each="tax : ${taxes}" th:value="${tax.id}" th:text="${tax.tax_deduction}" th:selected="${tax.id == pays.tax.id}"/>
+    </select>
+    <select name="employee" required>
+        <option selected disabled>Выберите сотрудника</option>
+        <option th:each="employee : ${employees}" th:value="${employee.id}" th:text="${employee.full_name}" th:selected="${employee.id == pays.employee.id}"/>
+    </select>
+    <button type="submit">Редактировать</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Должность</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<nav>
+  <ul>
+    <li><a th:href="@{/client}">Клиенты</a></li>
+    <li><a th:href="@{/commit}">Совершает</a></li>
+    <li><a th:href="@{/deal}">Сделка</a></li>
+    <li><a th:href="@{/employee}">Сотрудник</a></li>
+    <li><a th:href="@{/pays}">Платит</a></li>
+    <li><a th:href="@{/post}">Должность</a></li>
+    <li><a th:href="@{/tax}">Налог</a></li>
+  </ul>
+</nav>
+<h1>Должность</h1>
+<form th:action="@{/post/add}" method="post">
+  <input type="text" name="name" placeholder="Название" required>
+  <input type="number" name="bet" placeholder="Ставка" required>
+  <button type="submit">Добавить</button>
+</form>
+<table>
+  <thead>
+  <tr>
+    <th>ФИО</th>
+    <th>Сотрудник</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="post : ${posts}">
+    <td th:text="${post.name}"></td>
+    <td th:text="${post.bet}"></td>
+    <td>
+      <form th:action="@{/post/delete/{id}(id=${post.id})}" method="post">
+        <button type="submit">Удалить</button>
+      </form>
+    </td>
+    <td>
+      <form th:action="@{'/post/' + ${post.id}}">
+        <button type="submit">Редактировать</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

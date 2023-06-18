@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Сотрудник</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Сотрудник</h1>
+<form th:action="@{/employee/{id}(id=${employee.id})}" method="post">
+    <input type="text" name="full_name" th:value="${employee.full_name}" required>
+    <select name="post" required>
+        <option selected disabled>Выберите должность</option>
+        <option th:each="post : ${posts}" th:value="${post.id}" th:text="${post.name}" th:selected="${post.id == employee.post.id}"/>
+    </select>
+    <button type="submit">Редактировать</button>
+</form>
+</body>
+</html>
